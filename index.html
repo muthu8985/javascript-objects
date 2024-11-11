@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript_Objects</title>
+  </head>
+
+  <body>
+    <!-- creating objects -->
+    <script>
+      const person = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 50,
+        eyeColor: "blue",
+      };
+    </script>
+    <!-- creating the objects -->
+    <script>
+      const persons = {};
+      // adding object values
+      persons.firstname = "Muthu";
+      persons.lastname = "Kumar";
+      persons.age = 21;
+      persons.gender = "male";
+
+      document.write(persons.firstname + " and " + " " + persons.age);
+    </script>
+    <!-- object type creating the object constructor functions -->
+    <script>
+      function Aperson(first, last, age, number) {
+        this.firstName = first;
+        this.LastName = last;
+        this.Myage = age;
+        this.number = number;
+        // Constructor function for Person objects
+        this.nationality = "English";
+      }
+      // Create two Person objects
+      const myFather = new Aperson("John", "Doe", 50, 2);
+      const myMother = new Aperson("Sally", "Rally", 48, 4);
+      document.write(myFather.firstName + " and " + " " + myMother.firstName);
+      document.write(
+        "My father is " +
+          myFather.nationality +
+          ". My mother is " +
+          myMother.nationality
+      );
+    </script>
+    <script>
+      // Create Target Object
+      const person1 = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 50,
+        eyeColor: "blue",
+      };
+
+      // Create Source Object
+      const person2 = { firstName: "Anne", lastName: "Smith" };
+
+      // Assign Source to Target
+      Object.assign(person1, person2);
+
+      // Display Target
+      let text2 = Object.entries(person1);
+      document.write(text2);
+    </script>
+    <p>
+      Object.entries() returns an array of the key/value pairs in an object.
+    </p>
+
+    <p id="demo"></p>
+
+    <script>
+      const person3 = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 50,
+        eyeColor: "blue",
+      };
+
+      let text1 = Object.entries(person3);
+      document.getElementById("demo").innerHTML = text1;
+    </script>
+    <p>Object.entries() makes it simple to use objects in loops:</p>
+    <script>
+      const fruits = { Bananas: 300, Oranges: 200, Apples: 500 };
+
+      let text3 = "";
+      for (let [fruit, amount] of Object.entries(fruits)) {
+        text3 += fruit + ": " + amount + "<br>";
+      }
+      document.write(text3);
+    </script>
+    <p>Object.entries() makes it simple to convert an Object to a Map:</p>
+
+    <script>
+      const fruits1 = { Bananas: 300, Oranges: 200, Apples: 500 };
+
+      const myMap = new Map(Object.entries(fruits1));
+      console.log(myMap);
+    </script>
+    <p>
+      Object.values() is similar to Object.entries(), but returns a single
+      dimension array of the object values:
+    </p>
+    <h2>The Object.groupBy() Method</h2>
+
+    <p id="demo1"></p>
+
+    <script>
+      // Create an Array
+      const fruits2 = [
+        { name: "apples", quantity: 300 },
+        { name: "bananas", quantity: 500 },
+        { name: "oranges", quantity: 200 },
+        { name: "kiwi", quantity: 150 },
+      ];
+
+      // Callback function to select low volumes
+      function myCallback({ quantity }) {
+        return quantity > 200 ? "ok" : "low";
+      }
+
+      // Group by ok and low
+      const result = Object.groupBy(fruits2, myCallback);
+
+      // Display Results
+      let text4 = "These fruits are Ok: <br>";
+      for (let [x, y] of result.ok.entries()) {
+        text4 += y.name + " " + y.quantity + "<br>";
+      }
+
+      text4 += "<br>These fruits are low: <br>";
+      for (let [x, y] of result.low.entries()) {
+        text4 += y.name + " " + y.quantity + "<br>";
+      }
+
+      document.getElementById("demo1").innerHTML = text4;
+    </script>
+    <script>
+      // Create an Object
+      const person4 = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 50,
+        eyeColor: "blue",
+      };
+
+      // Get the Keys
+      const keys = Object.keys(person4);
+      document.write(keys);
+    </script>
+    <p id="demo2">looping property values</p>
+    <script>
+      const person5 = {
+        fname: "John",
+        lname: "Doe",
+        age: 25,
+      };
+
+      let txt = "";
+      for (let x in person5) {
+        txt += person5[x] + " ";
+      }
+
+      document.getElementById("demo2").innerHTML = txt;
+    </script>
+    <h2>The defineProperty() Method</h2>
+    <script>
+      const person6 = {
+        name: "muthu",
+        food: "yes",
+      };
+      // add property
+      Object.defineProperty(person6, "bike", { value: "yes" });
+      document.write(person6.bike);
+      // changing property values
+      Object.defineProperty(person6, "food", { value: "no" });
+
+      document.write(person6.food);
+      // getting properties values
+      propvalue = Object.getOwnPropertyNames(person6);
+      document.write(propvalue);
+    </script>
+
+    <p>
+      The following property meta data can be changed: writable : true //
+      Property value can be changed enumerable : true // Property can be
+      enumerated configurable : true // Property can be reconfigured writable :
+      false // Property value can not be changed enumerable : false // Property
+      can be not enumerated configurable : false // Property can be not
+      reconfigured
+    </p>
+    <p id="demo3">This example list all the properties of an object.</p>
+    <script>
+      // Create an Object:
+      const person7 = {
+        firstName: "John",
+        lastName: "Doe",
+        language: "EN",
+      };
+
+      // Change Property
+      Object.defineProperty(person7, "language", { enumerable: false });
+
+      // Display all Properties
+      document.getElementById("demo3").innerHTML =
+        Object.getOwnPropertyNames(person7);
+      // changing the language properties
+      langprop = Object.keys(person);
+      document.write(langprop);
+    </script>
+    <p id="demo4">
+      This example uses the defineProperty() method to add a getter and a
+      setter.
+    </p>
+
+    <script>
+      // Create an Object:
+      const person8 = { firstName: "John", lastName: "Doe" };
+
+      // Define a Getter
+      Object.defineProperty(person8, "fullName", {
+        get: function () {
+          return this.firstName + " " + this.lastName;
+        },
+      });
+
+      // Display fullName
+      document.getElementById("demo").innerHTML = person8.fullName;
+    </script>
+    <p id="demo5"></p>
+
+    <script>
+    // Create an object:
+    const person9 = {
+      firstName: "John",
+      lastName: "Doe",
+      language: "en",
+      get lang() {
+        return this.language;
+      }
+    };
+    
+    // Display data from the object using a getter:
+    document.getElementById("demo5").innerHTML = person9.lang;
+    </script>
+    <p id="demo6"></p>
+
+    <script>
+    // Create an object:
+    const person10 = {
+      firstName: "John",
+      lastName: "Doe",
+      language: "NO",
+      set lang(value) {
+        this.language = value;
+      }
+    };
+    
+    // Set a property using set:
+    person.lang = "en";
+    
+    // Display data from the object:
+    document.getElementById("demo6").innerHTML = person10.language;
+    </script>
+    <p>
+      JavaScript Function or Getter?
+What is the differences between these two examples?
+1.fullName as a function: person.fullName().
+2. fullName as a property: person.fullName.
+    </p>
+    <script src="index.js"></script>
+    
+
+  </body>
+
+</html>
